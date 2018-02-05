@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import logo from './logo.png';
 
 class App extends Component {
 
@@ -18,17 +19,21 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/27859-200.png' className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">onSight</h1>
           {
             !isAuthenticated() && (
-              <h3>Make Connections. Climb More. Explore Austin.</h3>
+              <h3 className="App-intro">Make Connections. Explore Austin. Climb More.</h3>
             )
           }
           {
             isAuthenticated() && (
-              <button type="button" onClick={this.logout.bind(this)}>Log Out</button>
-
+              <div className="App-links">
+                <button
+                  type="button"
+                  className="App-logout" 
+                  onClick={this.logout.bind(this)}>Log Out</button>
+              </div>
             )
           }
         </header>
