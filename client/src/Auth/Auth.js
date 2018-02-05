@@ -32,7 +32,7 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
         // navigate to Library page if logged in
-        history.replace('/library');
+        history.replace('/profile');
       } else if (err) {
         history.replace('/home');
         console.log(err);
