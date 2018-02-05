@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './home.css'
 
 class Home extends Component {
   login() {
@@ -11,7 +12,6 @@ class Home extends Component {
     return (
 
         <div>
-          <h2>Let's get climbing</h2>
 
           {
             isAuthenticated() && (
@@ -24,16 +24,16 @@ class Home extends Component {
           }
           {
             !isAuthenticated() && (
-                <h4>
-                  You are not logged in! Please{' '}
-                  <a
-                    style={{ cursor: 'pointer' }}
-                    onClick={this.login.bind(this)}
-                  >
-                    Log In
-                  </a>
-                  {' '}to continue.
-                </h4>
+
+              <div className='landing-wrapper'>
+                <button
+                  className={'landing-button'}
+                  onClick={this.login.bind(this)}>
+                  Enter
+                </button>
+          
+            </div>
+
               )
           }
           </div>

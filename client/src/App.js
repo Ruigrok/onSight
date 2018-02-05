@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -19,14 +18,19 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src='https://i.pinimg.com/originals/be/10/f8/be10f88c2097736acffffc6e01cc727b.jpg' className="App-logo" alt="logo" />
+          <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/27859-200.png' className="App-logo" alt="logo" />
           <h1 className="App-title">onSight</h1>
           {
-              isAuthenticated() && (
-                <button type="button" onClick={this.logout.bind(this)}>Log Out</button>
+            !isAuthenticated() && (
+              <h3>Make Connections. Climb More. Explore Austin.</h3>
+            )
+          }
+          {
+            isAuthenticated() && (
+              <button type="button" onClick={this.logout.bind(this)}>Log Out</button>
 
-              )
-            }
+            )
+          }
         </header>
 
         <div className="mainSection">
