@@ -1,52 +1,48 @@
 import React, { Component } from 'react';
-//import Dropzone from 'react-dropzone';
+import userHelpers from '../utils/userHelpers';
+import './Profile.css';
+
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Dropzone from 'react-dropzone';
 
 class Profile extends Component {
-/*   constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      title: "",
-      comments: "",
-      results: [],
       user: "",
-      email: null,
+      email: "",
+      name: "",
       photoRef: "",
-      nickname: "",
-      profileOpen: false,
-      favoriteBook: "",
-      currentlyReading: "",
-      newPhoto: "",
-      newFavBook: "",
-      newCurrRead: ""
+      about: "",
+      newName: "",
+      newPhotoRef: "",
+      newAbout: "",
+      profileOpen: "",
     };
   }
 
   getUser() {
     userHelpers.getUser(this.state.email)
       .then(result => {
-        if (result.data != null) {
+        if (result.data !== '') {
           this.setState({
             user: result.data,
-            favoriteBook: result.data.favoriteBook,
-            currentlyReading: result.data.currentlyReading,
-            photoRef: result.data.photoRef
-          }, this.getLibrary);
+            email: result.data.email,
+            name: result.data.name,
+            photoRef: result.data.photoRef,
+            about: result.data.about
+          });
         } else {
-          userHelpers.createUser(this.state.email, this.state.nickname, this.state.photoRef)
+          userHelpers.createUser(this.state.email, this.state.name, this.state.photoRef)
             .then(result => {
               this.setState({
                 user: result.data
-              }, this.getLibrary);
+              });
             })
         }
       })
-  }
-
-  getLibrary = () => {
-    libraryHelpers.showBooks(this.state.user.id).then(function (response) {
-      this.setState({ results: response.data })
-    }.bind(this))
   }
 
   componentDidMount() {
@@ -57,57 +53,40 @@ class Profile extends Component {
         this.setState({
           email: profile.email,
           photoRef: profile.picture,
-          nickname: profile.nickname
+          name: profile.name
         }, self.getUser);
       });
     } else {
       this.setState({
         email: userProfile.email,
         photoRef: userProfile.picture,
-        nickname: userProfile.nickname,
+        name: userProfile.name,
       }, self.getUser);
     }
   }
 
-  handleRequestClose = () => {
-    this.setState({ open: false });
-    libraryHelpers.getBookImageTitle(this.state.title).then(function (data) {
-      libraryHelpers.saveBook(data.returnedTitle, data.returnedAuthor, this.state.comments, data.returnedLink, this.state.user.id);
-      libraryHelpers.showBooks(this.state.user.id).then(function (response) {
-        this.setState({
-          results: response.data
-        })
-      }.bind(this))
-    }.bind(this))
+  editProfile = () => {
+    userHelpers.updateUser(this.state.user._id, this.state.newName, this.state.newPhotoRef, this.state.newAbout)
+      .then(() => {
+        this.handleEditRequestClose();
+        this.getUser();
+      });
+  }
+
+  handleEditTouchTap = () => {
+    this.setState({
+      profileOpen: true,
+      newName: '',
+      newPhotoRef: '',
+      newAbout: ''
+    });
   }
 
   handleEditRequestClose = () => {
     this.setState({ profileOpen: false });
   }
 
-  editProfile = () => {
-    let self = this;
-    userHelpers.updateUser(this.state.user.id, this.state.newFavBook, this.state.newCurrRead, this.state.newPhoto)
-      .then(() => {
-        self.getUser();
-        self.handleEditRequestClose();
-      })
-  }
-
-  handleTouchTap = () => {
-    this.setState({ open: true });
-  }
-
-  handleEditTouchTap = () => {
-    this.setState({
-      profileOpen: true,
-      newPhoto: '',
-      newFavBook: '',
-      newCurrRead: ''
-    });
-  }
-
-  handleChange = (event) => {
+  handleChange = event => {
     var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(newState);
@@ -117,17 +96,80 @@ class Profile extends Component {
     const image = files[0];
     userHelpers.cloudinaryPhoto(image)
       .then(response => {
-        this.setState({ newPhoto: response.data.secure_url })
+        this.setState({ newPhotoRef: response.data.secure_url })
       })
-  } */
+  }
 
-  // Here we render the function
   render() {
 
+    const editActions = (
+      <FlatButton
+        label="Update"
+        primary={true}
+        onTouchTap={this.editProfile}
+      />
+    );
+
     return (
-        <div>
-            <h2>profile</h2>
-            </div>
+      <div className="profile-wrapper">
+        <div className="profile-panel">
+          <div className="user-name">
+            <a>{this.state.name}</a>
+          </div>
+          <img src={this.state.photoRef} id="user-photo" alt="user" />
+          <div id="about">
+            <p><strong>About: </strong>{this.state.about}</p>
+          </div>
+          <MuiThemeProvider>
+            <Dialog
+              open={this.state.profileOpen}
+              title="Edit Profile"
+              actions={editActions}
+              onRequestClose={this.handleEditRequestClose}
+              autoScrollBodyContent={true}
+              className="edit-profile"
+            >
+              <div>
+                <h3>Name: </h3>
+                <input
+                  value={this.state.newName}
+                  type="text"
+                  className="form-control text-left"
+                  placeholder="display name"
+                  id="newName"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <h3>About: </h3>
+                <input
+                  value={this.state.newAbout}
+                  type="text"
+                  className="form-control text-left"
+                  placeholder="about you"
+                  id="newAbout"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className='edit-photo'>
+                <h3>Drag a new photo below or click to upload</h3>
+                <Dropzone
+                  onDrop={this.handleDrop}
+                  accept="image/*"
+                />
+                {
+                  (this.state.newPhotoRef !== "") && (
+                    <img src={this.state.newPhotoRef} className='uploaded-photo' alt='Upload Photo' />
+                  )
+                }
+              </div>
+            </Dialog>
+          </MuiThemeProvider>
+          <div id="edit-button">
+            <a onTouchTap={this.handleEditTouchTap} id="edit-link">Edit</a>
+          </div>
+        </div>
+      </div>
     );
   }
 };

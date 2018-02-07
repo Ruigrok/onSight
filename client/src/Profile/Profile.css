@@ -1,0 +1,52 @@
+.profile-wrapper {
+    padding: 200px 30px 30px 30px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.profile-panel {
+    text-align: center;
+    border: 5px solid rgb(49, 66, 93);
+    color: rgb(49, 66, 93);
+    margin-top: 20px;
+    margin-bottom: 60px;
+    max-width: 275px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.user-name {
+    padding: 8px 4px 8px 4px;
+    font-size: 22px;
+}
+
+#user-photo {
+    width: 100%;
+    height: auto;
+}
+
+#edit-button {
+    color: white;
+    background-color: rgb(253, 170, 41);
+    margin: 4px;
+    display: block;
+    max-width: 275px;
+}
+
+#edit-link {
+    display: block;
+    padding: 4px;
+}
+
+.uploaded-photo {
+    width: 100%;
+    max-width: 204px;
+    height: auto;
+}
+
+input {
+    min-height: 20px;
+    font-size: 14px;
+    color: rgb(49, 66, 93);
+}

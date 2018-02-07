@@ -14,3 +14,7 @@ button {
   border: 1.2px solid rgb(67, 68, 69);
   background: white;
 }
+
+button:focus {
+  outline:0;
+}

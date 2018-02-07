@@ -5,7 +5,9 @@ import history from './history';
 import App from './App';
 import Home from './Home/Home';
 import Profile from './Profile/Profile';
+import Community from './Community/Community'
 import Callback from './Callback/Callback';
+
 
 
 const auth = new Auth();
@@ -30,13 +32,13 @@ export const makeMainRoutes = () => {
               <Profile auth={auth} {...props} />
             )
           )} />
-{/*           <Route path="/community" render={(props) => (
+           <Route path="/community" render={(props) => (
             !auth.isAuthenticated() ? (
               <Redirect to="/home"/>
             ) : (
               <Community auth={auth} {...props} />
             )
-          )} /> */}
+          )} /> 
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} /> 

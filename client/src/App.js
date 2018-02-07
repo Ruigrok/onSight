@@ -28,12 +28,28 @@ class App extends Component {
           }
           {
             isAuthenticated() && (
-              <div className="App-links">
-                <button
-                  type="button"
-                  className="App-logout" 
-                  onClick={this.logout.bind(this)}>Log Out</button>
-              </div>
+                <div className="App-menu">
+                  <button
+                    type="button"
+                    className="App-links"
+                    onClick={this.goTo.bind(this, 'profile')}>
+                    Profile
+                  </button>
+
+                  <button
+                    type="button"
+                    className="App-links"
+                    onClick={this.goTo.bind(this, 'community')}>
+                    Community
+                  </button>
+
+                  <button
+                    type="button"
+                    className="App-logout"
+                    onClick={this.logout.bind(this)}>
+                    Log Out
+                  </button>
+                </div>
             )
           }
         </header>

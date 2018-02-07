@@ -1,0 +1,43 @@
+.users-wrapper {
+    padding: 200px 30px 30px 30px;
+}
+
+.users-display {
+    display: flex;
+    justify-content: left;
+    flex-flow: row wrap;
+}
+
+.profile-panel {
+    flex-basis: 200px;
+    text-align: center;
+    border: 5px solid rgb(49, 66, 93);
+    color: rgb(49, 66, 93);
+    margin: 20px 30px 30px 20px;
+    max-width: 200px;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+.user-name {
+    padding: 8px 4px 8px 4px;
+    font-size: 22px;
+}
+
+#user-photo {
+    width: 100%;
+    height: auto;
+}
+
+#message-button {
+    color: white;
+    background-color: rgb(253, 170, 41);
+    margin: 4px;
+    display: block;
+    max-width: 275px;
+}
+
+#message-link {
+    display: block;
+    padding: 4px;
+}
