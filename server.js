@@ -5,9 +5,6 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Models for MongoDB
-//const User = require('./models/User');
-
 // Create Instance of Express
 const app = express();
 // Set a port
@@ -23,8 +20,6 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Set up Mongoose
-//mongoose.Promise = global.Promise;
-
 const db = mongoose.connect('mongodb://localhost/onSight');
 
 db
@@ -43,7 +38,6 @@ app.use(express.static('client/public'));
 require('./api-routes/user-routes.js')(app);
 
 // All non-API get routes
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/public/index.html'));
 });
