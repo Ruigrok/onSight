@@ -1,0 +1,52 @@
+.style0 {
+    fill:#3B4250;
+}
+
+.style1 {
+  fill: #FFFFFF;
+}
+
+.style10 {
+  fill: #DF5444;
+}
+
+.style2 {
+  fill: #242C3C;}
+
+.style3 {
+  fill: #6DBEC4;}
+
+.style4 {
+  fill: #E36A5C;}
+
+.style5 {
+  fill: #ABADB3;}
+
+.style6 {
+  opacity: 0.6;
+  fill:  #FFFFFF;}
+
+.style7 {
+  fill: #F0F0F0;}
+
+.style8 {
+  fill: #D8D8DA;
+  }
+    
+.style9 {
+  fill: #EEA738;
+}
+
+#loading {
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(359deg);
+  }
+}
+

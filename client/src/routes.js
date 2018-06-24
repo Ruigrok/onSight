@@ -7,7 +7,7 @@ import Home from './Home/Home';
 import Profile from './Profile/Profile';
 import Community from './Community/Community'
 import Callback from './Callback/Callback';
-
+import IconTest from './IconTest/IconTest';
 
 
 const auth = new Auth();
@@ -25,6 +25,7 @@ export const makeMainRoutes = () => {
           <Route path="/" render={(props) => <App auth={auth} {...props} />} />
           <Route exact path="/" render={(props) => <Redirect to="/home"/>} />
           <Route path="/home" render={(props) => <Home auth={auth} {...props} />} />
+          <Route path='/icon-test' render={(props) => <IconTest />} />
            <Route path="/profile" render={(props) => (
             !auth.isAuthenticated() ? (
               <Redirect to="/home"/>

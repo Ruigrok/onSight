@@ -1,0 +1,17 @@
+runtime: nodejs
+env: flex
+# [END runtime]
+
+# [START handler]
+handlers:
+- url: /
+  static_files: client/build/index.html
+  upload: client/build/index.html
+
+- url: /(.*)
+  static_files: client/build/\1
+  upload: client/build/(.*)
+
+# [END hanlders]
+
+
